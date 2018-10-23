@@ -20,7 +20,7 @@ class JSONHash
       if valid_json()
         return @json
       else
-        message = "Le fichier dentree n est pas valide"
+        message = "Le fichier JSON n est pas valide"
         error_handle(message)
       end
     else

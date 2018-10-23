@@ -6,20 +6,20 @@ require 'Care'
 
 class AssuredCare < Care
   
-  attr_accessor :care_num, :limit, :percent, :month_limit
+  attr_accessor :care_num, :percent, :limit, :month_limit
   
-  def initialize(care_num, limit, percent, month_limit)
+  def initialize(care_num, percent, limit, month_limit)
     super(care_num)
-    @limit = limit
     @percent = percent
+    @limit = limit
     @month_limit = month_limit
   end
   
-  def have_monthly_limit()
+  def has_monthly_limit()
     return @month_limit != 0.0
   end
   
-  def have_limit()
+  def has_limit()
     return @limit != 0.0
   end
   
