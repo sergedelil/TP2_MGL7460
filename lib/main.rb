@@ -36,7 +36,7 @@ Treatment.treat_claim(ARGV[0], ARGV[1])
 
 
 
-
+# Test push Git   a suprimer
 # ==================   a suprimer
 #puts ARGV[0]
 #file = JSONHash.new(ARGV[0])
