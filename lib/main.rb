@@ -13,7 +13,7 @@ end
 
 
 
-
+# Test push Git   a suprimer
 # ==================   a suprimer
 puts ARGV[0]
 file = JSONHash.new(ARGV[0])
