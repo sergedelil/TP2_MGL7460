@@ -19,8 +19,9 @@ if ARGV.length != 2
   exit
 end
 
-puts ARGV[0]
-puts ARGV[1]
+puts "arg 1 = " + ARGV[0]
+puts "arg 2 = " + ARGV[1]
+puts "==============="
 
 Treatment.treat_claim(ARGV[0], ARGV[1])
 

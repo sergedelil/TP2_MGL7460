@@ -12,7 +12,7 @@ module Treatment
   #@refund = Dollar.new
   
   def self.treat_claim(input_file, police_file)
-    limit_month_cum = Dollar.new(0, 0)
+    limit_month_cum = self.create_dollar(0.0)
     claim = Creator.load_claim(input_file)
     polices = Creator.load_police(police_file)
   
@@ -20,41 +20,25 @@ module Treatment
   end
   
   def self.calculate_refund(claim, polices, limit_month_cum)
+    refund_cumul = self.create_dollar(0.0)
     list_claim = claim.claim_list
     contract = claim.account_num[0]
-    dossier = claim.account_num
-    mois = claim.claim_month
-    require 'json'
-    
-    temp_hash = JSON[{:dossier => dossier, :mois => mois, :reclamations => []}]
- 
-    #temp_hash["reclamations"].concat([0])
-   
-    #claims = claim["reclamations"]
-    #list_assured_care = get_assured_care_list(contract, polices)
-    
     list_claim.each { |_claim|
-      #i = 0
-      soin = _claim.care_num
-      date = _claim.care_date
-      montant = _claim.amount
-      temp_soin = JSON[{:soin => soin, :date => date, :montant => montant}]
-      
       care = self.get_assured_care(contract, _claim, polices)
       if care.is_covered
         self.apply_police(_claim, care)
-        temp_soin["montant"] = @refund.to_string
-        #cumuler les refund 
+        refund_cumul.additionner(@refund)
         # handle_monthly_limit(care, month_limit)
       end
-      #puts temp_hash[:reclamations]
-      #temp_hash[:reclamations].insert(i, temp_soin)
-      #i += 1
-      puts @refund.to_string
-      puts JSON[temp_hash]
-      puts JSON[temp_soin]
-      exit
+      puts "refund = " + @refund.to_string
+      puts "==============="
+      
+      
     }
+    puts claim.account_num
+    puts claim.claim_month
+    puts "Refund cumul = " + refund_cumul.to_string
+    exit
   end
   
   def handle_monthly_limit(care, month_limit)
@@ -82,6 +66,7 @@ module Treatment
   end
   
   def self.apply_police(_claim, care)
+    puts "amount = " + _claim.amount
     @refund = self.create_dollar(_claim.amount)
     @refund.pourcentage(care.percent * 100)
     
@@ -91,6 +76,7 @@ module Treatment
         @refund = amount_limit
       end
     end
+    _claim.amount = @refund.to_string
   end
   
   def get_assured_care_list(contract, polices)
@@ -103,11 +89,13 @@ module Treatment
   
   
   def self.create_dollar(montant)
-    puts "=== ici 1==="
-    
-    dollars = montant.split(".").map(&:to_i).first
-    cents = montant.split(".").map(&:to_i).last
-    
+    if montant != 0.0
+      dollars = montant.split(".").map(&:to_i).first
+      cents = montant.split(".").map(&:to_i).last
+    else
+      dollars = 0
+      cents = 0
+    end
     return Dollar.new(dollars, cents)
     
   end
