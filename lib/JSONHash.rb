@@ -9,7 +9,7 @@ include Message
 
 class JSONHash
   
-  #attr_accessor :filename, :json
+  attr_accessor :filename, :json
   
   def initialize(file={})
     @filename = file
@@ -46,7 +46,7 @@ end
   
   # Save this to disk, optionally specifying a new location
   def save(file=nil)
-    @filename = file if file
+    #ß@filename = file if file
     File.open(@filename,'w'){ |f| JSON.dump(@json, f) }
     self
   end

@@ -2,14 +2,17 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
+require 'json'
+
 class Claim
   
-  attr_accessor :account_num, :claim_month, :claim_list
+  attr_accessor :account_num, :claim_month, :claim_list, :total
 
-  def initialize(account_num, claim_month, claim_list)
+  def initialize(account_num, claim_month, claim_list, total=0)
     @account_num = account_num
     @claim_month = claim_month
     @claim_list = claim_list
+    @total = total
   end
   
   def validate_account_num()
@@ -24,5 +27,15 @@ class Claim
     #si tous les soins sont de la date de le reclamation.
     #et que les polices des soins correspondent bien au dossier
   end
-   
+  
+  def to_json
+    {
+      dossier: @account_num,
+      mois: @claim_month,
+      reclamations: @claim_list.map do |received_care|
+        received_care.to_hash
+      end,
+      total: @total
+    }.to_json
+  end  
 end

@@ -17,6 +17,7 @@ module Treatment
     polices = Creator.load_police(police_file)
   
     self.calculate_refund(claim, polices, limit_month_cum)
+    return claim
   end
   
   def self.calculate_refund(claim, polices, limit_month_cum)
@@ -30,15 +31,9 @@ module Treatment
         refund_cumul.additionner(@refund)
         # handle_monthly_limit(care, month_limit)
       end
-      puts "refund = " + @refund.to_string
-      puts "==============="
-      
-      
     }
-    puts claim.account_num
-    puts claim.claim_month
-    puts "Refund cumul = " + refund_cumul.to_string
-    exit
+    claim.total = refund_cumul.to_string
+    return claim
   end
   
   def handle_monthly_limit(care, month_limit)
@@ -49,6 +44,15 @@ module Treatment
         
       #end
     end
+  end
+  
+  def self.write_output(claim, output_path)
+    obj = claim.to_json
+    puts obj
+#    output = Creator.get_json_objet(output_path)
+#    output.json = JSON.parse(obj)
+#    output.save('output')
+    #adapter JSONHash to save
   end
   
   def self.get_assured_care(contract, _claim, polices)
@@ -66,7 +70,6 @@ module Treatment
   end
   
   def self.apply_police(_claim, care)
-    puts "amount = " + _claim.amount
     @refund = self.create_dollar(_claim.amount)
     @refund.pourcentage(care.percent * 100)
     

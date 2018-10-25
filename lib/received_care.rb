@@ -3,6 +3,7 @@
 # and open the template in the editor.
 
 require 'Care'
+require 'json'
 
 class ReceivedCare < Care
   
@@ -21,4 +22,17 @@ class ReceivedCare < Care
   def validate_amount()
     return "^\\d+[.,]?\\d{2}\\$$"..match?(@amount)
   end
+  
+  def to_hash
+    {
+      soin: @care_num,
+      date: @care_date,
+      montant: @amount
+    }
+  end
+  
+#  def to_json
+#    to_hash.to_json
+#  end
+  
 end
