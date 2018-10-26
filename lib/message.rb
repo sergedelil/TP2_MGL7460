@@ -5,6 +5,7 @@ module Message
   
   def error_handle(message)
     puts message ## il faut ecrire le messahe sur disque
+    exit
   end
   
 end

@@ -16,11 +16,11 @@ class ReceivedCare < Care
   end
   
   def validate_care_date()
-    return "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$".match?(@care_date)
+    return !!(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/ =~ @care_date)
   end
   
   def validate_amount()
-    return "^\\d+[.,]?\\d{2}\\$$"..match?(@amount)
+    return !!(/^\d+[.,]?\d{2}\$$/ =~ @amount)
   end
   
   def to_hash

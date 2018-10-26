@@ -1,5 +1,12 @@
 require "./treatment.rb"
  
+
+
+#res = !!("A123455" =~ /^[ABCDE]\d{6}$/)
+#res = !!(/^[ABCDE]\d{6}$/ =~ "A123455" )
+#puts res
+#exit
+
 if ARGV.length != 3
   puts "argument missing"
   exit

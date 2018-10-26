@@ -10,6 +10,6 @@ class Care
   end
   
   def validate_num_care()
-    return "^(0|150|175|[1-7]0{2}|3[0-9]{2})$".match?(@care_num)
+    return !!(/^(0|150|175|[1-7]0{2}|3[0-9]{2})$/ =~ @care_num.to_s)
   end
 end
