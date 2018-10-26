@@ -13,6 +13,7 @@ class JSONHash
   
   def initialize(file={})
     @filename = file
+    #@json = ""
   end
   
   def load()
@@ -45,9 +46,11 @@ end
   end
   
   # Save this to disk, optionally specifying a new location
-  def save(file=nil)
-    #ß@filename = file if file
-    File.open(@filename,'w'){ |f| JSON.dump(@json, f) }
+  def save(obj)
+    @json = JSON.parse(obj)
+    File.open(@filename,"w") do |f|
+      f.write(JSON.pretty_generate(@json))
+    end
     self
   end
   

@@ -48,11 +48,9 @@ module Treatment
   
   def self.write_output(claim, output_path)
     obj = claim.to_json
-    puts obj
-#    output = Creator.get_json_objet(output_path)
-#    output.json = JSON.parse(obj)
-#    output.save('output')
-    #adapter JSONHash to save
+    out = JSONHash.new(output_path)
+    out.save(obj)
+    puts JSON.pretty_generate(JSON.parse(obj))
   end
   
   def self.get_assured_care(contract, _claim, polices)
