@@ -35,6 +35,7 @@ module Creator
   
   def self.load_claim(input_file)
     claim_obj = self.get_json_objet(input_file)
+    validate_json_key(claim_obj)
     account = claim_obj["dossier"]
     month = claim_obj["mois"]
     claims = claim_obj["reclamations"]
@@ -70,6 +71,30 @@ module Creator
         message = "La date du soin " + i.to_s + " n est pas valide"
       elsif ! one_claim.validate_amount
         message = "Le montant du soin " + i.to_s + " n est pas valide" 
+      end
+      error_handle(message) if message
+      i += 1
+    }
+  end
+  
+  def self.validate_json_key(claim_obj)
+    if ! claim_obj.has_key? 'dossier'
+      message = "La propriete dossier n existe pas"
+    elsif ! claim_obj.has_key? 'mois'
+      message = "La propriete mois n existe pas"
+    elsif ! claim_obj.has_key? 'reclamations'
+      message = "La propriete reclamations n existe pas"
+    end
+    error_handle(message) if message
+    i = 1
+    #list_claim = claim_obj.claim_list
+    claim_obj['reclamations'].each { |claim| 
+      if ! claim.has_key? 'soin'
+        message = "La propriete soin du soin " + i.to_s + " n existe pas"
+      elsif ! claim.has_key? 'date'
+        message = "La propriete date du soin " + i.to_s + " n existe pas"
+      elsif ! claim.has_key? 'montant'
+        message = "La propriete montant du soin " + i.to_s + " n existe pas"
       end
       error_handle(message) if message
       i += 1
