@@ -2,8 +2,8 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-require "Creator"
-require "./dollar.rb"
+require_relative "Creator"
+require_relative "./dollar.rb"
 
 
 

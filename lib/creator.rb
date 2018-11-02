@@ -2,13 +2,13 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-require 'JSONHash'
-require 'Police'
-require 'Claim'
-require 'Care'
-require './assured_care'
-require './received_care'
-require 'Message'
+require_relative 'JSONHash'
+require_relative 'Police'
+require_relative 'Claim'
+require_relative 'Care'
+require_relative './assured_care'
+require_relative './received_care'
+require_relative 'Message'
 
 
 module Creator

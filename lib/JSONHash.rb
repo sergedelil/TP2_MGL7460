@@ -3,7 +3,7 @@
 # and open the template in the editor.
 
 require 'json'
-require "message"
+require_relative "message"
 
 include Message
 
