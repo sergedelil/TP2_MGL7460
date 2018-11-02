@@ -16,4 +16,9 @@ class DollarTest < Test::Unit::TestCase
   def test_get_dollars      
     assert_equal(10, Dollar.new(10, 10).get_dollars())   
   end
+  
+  def test_get_cents
+    assert_equal(1,Dollar.new(10, 1).get_cents())
+  end
+  
 end
