@@ -6,7 +6,6 @@ require './assured_care'
 require './received_care'
 require 'Message'
 
-
 module Creator
   
   def self.load_police(police_file)

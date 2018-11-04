@@ -1,5 +1,5 @@
 require 'json'
-require "message"
+require_relative "message"
 
 include Message
 

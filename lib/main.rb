@@ -1,4 +1,4 @@
-require "./treatment.rb"
+require_relative "./treatment.rb"
  
 if ARGV.length != 3
   puts "argument missing"
