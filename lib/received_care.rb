@@ -1,7 +1,3 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
 require 'Care'
 require 'json'
 
@@ -30,9 +26,4 @@ class ReceivedCare < Care
       montant: @amount
     }
   end
-  
-#  def to_json
-#    to_hash.to_json
-#  end
-  
 end

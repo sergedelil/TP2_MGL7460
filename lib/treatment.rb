@@ -1,15 +1,7 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
 require "Creator"
 require "./dollar.rb"
 
-
-
 module Treatment
-  
-  #@refund = Dollar.new
   
   def self.treat_claim(input_file, police_file)
     limit_month_cum = self.create_dollar(0.0)
@@ -29,21 +21,10 @@ module Treatment
       if care.is_covered
         self.apply_police(_claim, care)
         refund_cumul.additionner(@refund)
-        # handle_monthly_limit(care, month_limit)
       end
     }
     claim.total = refund_cumul.to_string
     return claim
-  end
-  
-  def handle_monthly_limit(care, month_limit)
-    # à completer
-    if month_limit.get_total_cents < @refund.get_total_cents
-      limit_month_cum.additionner(@refund)
-      #if month_limit.get_total_cents > @refund.get_total_cents
-        
-      #end
-    end
   end
   
   def self.write_output(claim, output_path)
@@ -88,7 +69,6 @@ module Treatment
     }
   end
   
-  
   def self.create_dollar(montant)
     if montant != 0.0
       dollars = montant.split(".").map(&:to_i).first
@@ -100,5 +80,4 @@ module Treatment
     return Dollar.new(dollars, cents)
     
   end
-  
 end

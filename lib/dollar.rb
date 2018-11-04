@@ -1,7 +1,3 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
 class Dollar
   
   attr_accessor :total_cents
@@ -9,16 +5,12 @@ class Dollar
   def initialize(dollars, cents)
     if(dollars < 0 || cents < 0 || cents > 99)
       puts "error"
-      #throw new IllegalArgumentException()
+      exit
     else
       @total_cents = dollars * 100 + cents;
     end
   end
-  
-#  def self.initialize()
-#    @total_cents = 0
-#  end
-  
+ 
   def to_string()
     return get_dollars().to_s + "." + get_cents().to_s + "$"
   end
@@ -39,7 +31,7 @@ class Dollar
     @total_cents += autre.total_cents
   end
     
-  def soustraire (autre) #throws OperationInvalideException 
+  def soustraire (autre)
     verifierOperandes(autre)
     @total_cents -= autre.total_cents
   end
@@ -53,12 +45,11 @@ class Dollar
     @total_cents = @total_cents * autre.total_cents
   end
     
-  def verifier_operandes(autre) #throws OperationInvalideException 
+  def verifier_operandes(autre) 
         
     if total_cents < autre.get_total_cents()
-      puts "===error"
-      #throw new OperationInvalideException("Opération impossible : "\
-          #+ @total_cents + " - " + autre.total_cents);
+      puts "=== error"
+      exit
     end
   end
 end

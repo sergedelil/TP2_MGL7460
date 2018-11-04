@@ -1,7 +1,3 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
 require 'JSONHash'
 require 'Police'
 require 'Claim'
@@ -87,7 +83,6 @@ module Creator
     end
     error_handle(message) if message
     i = 1
-    #list_claim = claim_obj.claim_list
     claim_obj['reclamations'].each { |claim| 
       if ! claim.has_key? 'soin'
         message = "La propriete soin du soin " + i.to_s + " n existe pas"
